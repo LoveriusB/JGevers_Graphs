@@ -1,11 +1,17 @@
-import { Container, Typography } from "@mui/material";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import AppLayout from './layouts/AppLayout';
+import { graphRoutes } from './navigation/graphRoutes';
 
 export default function App() {
   return (
-    <Container component="main" maxWidth="xl" sx={{ py: 4 }}>
-      <Typography component="h1" variant="h4">
-        Jacques Graphs
-      </Typography>
-    </Container>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<Navigate to={graphRoutes[0].path} replace />} />
+          {graphRoutes.map(({ path, page: Page }) => <Route key={path} path={path} element={<Page />} />)}
+          <Route path="*" element={<Navigate to={graphRoutes[0].path} replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
