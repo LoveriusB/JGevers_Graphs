@@ -16,17 +16,17 @@ function mockStorage() {
 test('les routes isolent leurs fichiers, remplacement et suppression inclus', () => {
   mockStorage();
   const ranking = createRouteCache('/ranking', codec);
-  const second = createRouteCache('/graph-2', codec);
+  const second = createRouteCache('/sankey', codec);
   assert.equal(ranking.read(), null);
   ranking.save({ filename: 'ranking.xlsx' });
   assert.equal(second.read(), null);
-  second.save({ filename: 'second.xlsx' });
+  second.save({ filename: 'sankey.xlsx' });
   assert.equal(ranking.read().filename, 'ranking.xlsx');
   ranking.save({ filename: 'ranking2.xlsx' });
-  assert.equal(second.read().filename, 'second.xlsx');
+  assert.equal(second.read().filename, 'sankey.xlsx');
   ranking.clear();
   assert.equal(ranking.read(), null);
-  assert.equal(second.read().filename, 'second.xlsx');
+  assert.equal(second.read().filename, 'sankey.xlsx');
   assert.equal(createRouteCache('/ranking', codec).read(), null);
 });
 
@@ -35,7 +35,7 @@ test('le classement est restauré depuis le stockage de session après actualisa
   const ranking = createRouteCache('/ranking', codec);
   ranking.save({ filename: 'ranking.xlsx' });
   assert.deepEqual(createRouteCache('/ranking', codec).read(), ranking.read());
-  assert.equal(createRouteCache('/graph-2', codec).read(), null);
+  assert.equal(createRouteCache('/sankey', codec).read(), null);
 });
 
 test('la mémoire fonctionne même sans sessionStorage ou quand il est plein', () => {
@@ -51,8 +51,8 @@ test('la mémoire fonctionne même sans sessionStorage ou quand il est plein', (
 test('un fichier brut reste en mémoire et notifie les consommateurs de sa route uniquement', () => {
   const storage = mockStorage();
   const ranking = createRouteCache('/ranking', codec);
-  const second = createRouteCache('/graph-2');
-  const file = new File(['test'], 'second.xlsx');
+  const second = createRouteCache('/sankey');
+  const file = new File(['test'], 'sankey.xlsx');
   let notifications = 0;
   const unsubscribe = second.subscribe(() => { notifications += 1; });
   ranking.save({ filename: 'ranking.xlsx' });

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GraphPageHeader } from "../../components/graphs/GraphPageHeader";
 import {
   Alert,
   Box,
@@ -55,22 +56,10 @@ export function RankingView() {
     <Box sx={{ minWidth: 0 }}>
       <Container maxWidth="xl" sx={{ pb: 6, px: { xs: 1, sm: 2 } }}>
         <Stack spacing={3}>
-          <Box>
-            <Typography
-              variant="overline"
-              color="primary.main"
-              sx={{ fontWeight: 800, letterSpacing: 2 }}
-            >
-              EXPLORATEUR DE DONNÉES
-            </Typography>
-            <Typography variant="h4" sx={{ mt: 0.5 }}>
-              Évolution des classements
-            </Typography>
-            <Typography color="text.secondary" sx={{ mt: 1, maxWidth: 660 }}>
-              Visualisez comment chaque pays monte ou descend dans le classement
-              des chiffres d’affaires, année après année.
-            </Typography>
-          </Box>
+          <GraphPageHeader
+            title="Évolution des classements"
+            description="Visualisez comment chaque pays monte ou descend dans le classement des chiffres d’affaires, année après année."
+          />
           {!dataset ? (
             <Paper
               variant="outlined"

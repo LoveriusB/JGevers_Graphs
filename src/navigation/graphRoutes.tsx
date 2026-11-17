@@ -1,9 +1,9 @@
 import ShowChartRounded from '@mui/icons-material/ShowChartRounded';
-import BarChartRounded from '@mui/icons-material/BarChartRounded';
+import HubRounded from '@mui/icons-material/HubRounded';
 import RankingPage from '../pages/RankingPage';
-import SecondGraphPage from '../pages/SecondGraphPage';
+import SankeyPage from '../pages/SankeyPage';
 
 export const graphRoutes = [
   { path: '/ranking', label: 'Évolution du classement', icon: ShowChartRounded, page: RankingPage },
-  { path: '/graph-2', label: 'Graphique 2', icon: BarChartRounded, page: SecondGraphPage },
+  { path: '/sankey', label: 'Case Flow Sankey', icon: HubRounded, page: SankeyPage },
 ] as const;
